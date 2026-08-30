@@ -1,0 +1,27 @@
+# LaTeX build artifacts.
+# PDFs are deliberately NOT ignored: the repository ships template-preview-*.pdf,
+# and most people want their own proposal.pdf or main.pdf under version control.
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.synctex.gz
+
+# Front-matter lists.
+*.lof
+*.lot
+*.loa
+*.lap
+*.lol
+
+# Emitted when a stray file is compiled without a job name.
+texput.log
+
+# Editor and OS noise.
+.vscode/
+.DS_Store
+Thumbs.db

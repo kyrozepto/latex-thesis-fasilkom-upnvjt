@@ -38,14 +38,20 @@
 \newcommand{\FacultyLabel}{\Lang{Fakultas Ilmu Komputer}{Faculty of Computer Science}}
 \newcommand{\ProgramLabel}{\MakeUppercase{\StudyProgramPhrase}}
 \newcommand{\ApprovalSheetLabel}{\Lang{LEMBAR PENGESAHAN}{APPROVAL SHEET}}
-\newcommand{\AcceptanceSheetLabel}{\Lang{LEMBAR PERSETUJUAN}{APPROVAL SHEET}}
+% LEMBAR PENGESAHAN (tim penguji) dan LEMBAR PERSETUJUAN (koordinator program
+% studi) adalah dua halaman berbeda, sehingga judul Inggrisnya juga dibedakan.
+\newcommand{\AcceptanceSheetLabel}{\Lang{LEMBAR PERSETUJUAN}{CONSENT SHEET}}
 \newcommand{\PlagiarismStatementLabel}{\Lang{SURAT PERNYATAAN BEBAS PLAGIASI}{STATEMENT OF ORIGINALITY}}
 \newcommand{\PrefaceLabel}{\Lang{KATA PENGANTAR}{ACKNOWLEDGEMENTS}}
 \newcommand{\AbbreviationListLabel}{\Lang{DAFTAR SINGKATAN}{LIST OF ABBREVIATIONS}}
+\newcommand{\GlossaryListLabel}{\Lang{GLOSARIUM}{GLOSSARY}}
 \newcommand{\AppendixLabel}{\Lang{LAMPIRAN}{APPENDIX}}
 \newcommand{\AppendixListLabel}{\Lang{DAFTAR LAMPIRAN}{LIST OF APPENDICES}}
 \newcommand{\BibliographyLabel}{\Lang{DAFTAR PUSTAKA}{BIBLIOGRAPHY}}
-\newcommand{\ChapterPrefix}{\Lang{BAB}{CHAPTER}}
+% template.cls sudah menyediakan \ChapterPrefix sebagai cadangan agar berkas
+% kelas itu tetap bisa dipakai sendiri, jadi di sini nilainya ditimpa.
+\providecommand{\ChapterPrefix}{}
+\renewcommand{\ChapterPrefix}{\Lang{BAB}{CHAPTER}}
 \newcommand{\ContentsPrefix}{\Lang{BAB }{CHAPTER }}
 \newcommand{\NpmLabel}{\Lang{NPM}{NPM}}
 \newcommand{\ByLabel}{\Lang{Oleh}{By}}
@@ -73,9 +79,23 @@
   \renewcommand{\bibname}{\BibliographyLabel}%
   \renewcommand{\lstlistingname}{\Lang{Kode Program}{Code Program}}%
   \renewcommand{\lstlistlistingname}{\Lang{DAFTAR KODE}{LIST OF CODE}}%
-  \renewcommand{\algorithmcfname}{\Lang{Kode Program}{Code Program}}%
-  \renewcommand{\listalgorithmcfname}{\Lang{DAFTAR KODE}{LIST OF CODE}}%
+  % \providecommand dipasang lebih dahulu agar berkas ini tetap aman dimuat
+  % dokumen yang tidak memuat algorithm2e, misalnya naskah proposal.
+  \providecommand{\algorithmcfname}{}%
+  \providecommand{\listalgorithmcfname}{}%
+  \renewcommand{\algorithmcfname}{\Lang{Algoritma}{Algorithm}}%
+  \renewcommand{\listalgorithmcfname}{\Lang{DAFTAR ALGORITMA}{LIST OF ALGORITHMS}}%
 }
+
+% Document-type wording printed on the cover. Each driver selects one through
+% \ThesisTarget; see config/thesis-preamble.tex.
+\newcommand{\ProposalTypeLabel}{\Lang{PRA-SKRIPSI}{RESEARCH PROPOSAL}}
+\newcommand{\DraftTypeLabel}{\Lang{\DocTypeName\ (DRAF BAB I--IV)}{\DocTypeName\ (DRAFT CH. I--IV)}}
+\newcommand{\ThesisCoverTypeLabel}{%
+  \ifThesisProposal \ProposalTypeLabel
+  \else\ifThesisDraft \DraftTypeLabel
+  \else \DocTypeLabel
+  \fi\fi}
 
 % Reusable heading format for main chapters.
 \newcommand{\ApplyMainChapterStyle}{%

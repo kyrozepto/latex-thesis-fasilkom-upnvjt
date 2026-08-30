@@ -3,21 +3,96 @@
 \section{Implementation or Research Execution Results}
 \TemplateTodo{Report what was actually built, collected, or executed. Separate factual results from interpretation.}
 
+% Pseudocode belongs in Chapter IV rather than Chapter III, because what is
+% reported is the procedure that was actually run. That is also why the proposal
+% manuscript does not load algorithm2e at all.
+%
+% \KwInput, \KwOutput, and \KwReturn are the bilingual versions defined in
+% config/thesis-preamble.tex: they print Masukan/Keluaran/Kembalikan in an
+% Indonesian manuscript and Input/Output/Return in an English one. The stock
+% algorithm2e commands (\KwIn, \KwOut, \Return) still work but are always
+% English. The number reads "Algorithm 4. 1" and is listed in LIST OF ALGORITHMS.
+\begin{algorithm}[H]
+\caption{Example research algorithm format}\label{alg:example}
+\KwInput{Research data or input}
+\KwOutput{Evaluated results}
+Perform data preparation\;
+Apply the proposed method\;
+\ForEach{evaluation scenario}{
+  Evaluate outputs using appropriate metrics\;
+}
+\KwReturn{Summary of results and analysis}
+\end{algorithm}
+
+The procedure is summarized in Algorithm~\ref{alg:example}.
+
 \section{Evaluation Results}
 \TemplateTodo{Present main results according to the scenarios in Chapter III. Tables should have clear captions, units, and sufficient explanation.}
 
-\begin{table}[H]
-\centering
-\caption{Example evaluation result table}
-\begin{tabular}{@{}lcc@{}}
-\toprule
-Scenario & Metric 1 & Metric 2 \\
-\midrule
-Scenario A & value & value \\
-Scenario B & value & value \\
-\bottomrule
-\end{tabular}
-\end{table}
+The main results are summarized in Table \ref{tab:evaluation-results}.
+
+% TABLE EXAMPLE 3: numeric table, narrow columns, no flexible column.
+%
+% When every column holds a short number, tabularx is unnecessary: a plain
+% longtable with l and c columns sizes itself to its content. Use c for numbers
+% so they centre and stay easy to compare down the column.
+%
+% \multicolumn{4}{|l|}{\textbf{...}} makes a group heading row spanning the full
+% table width, used to separate blocks of scenarios without splitting the table
+% into several smaller ones.
+\begin{longtable}{|l|c|c|c|}
+\caption{Example evaluation result table.}\label{tab:evaluation-results}\\
+\hline
+Scenario & Metric 1 & Metric 2 & Metric 3 \\
+\hline
+\endfirsthead
+\hline
+Scenario & Metric 1 & Metric 2 & Metric 3 \\
+\hline
+\endhead
+\hline
+\endlastfoot
+\multicolumn{4}{|l|}{\textbf{Main evaluation protocol}} \\
+\hline
+Scenario A & 0.00 & 0.00 & 0.00 \\
+\hline
+Scenario B & 0.00 & 0.00 & 0.00 \\
+\hline
+\multicolumn{4}{|l|}{\textbf{Ablation protocol}} \\
+\hline
+Scenario C & 0.00 & 0.00 & 0.00 \\
+\end{longtable}
+
+Report every number with the same count of decimal places within one column, so the values line up and stay comparable at a glance.
+
+% TABLE EXAMPLE 4: a wide table with many columns.
+%
+% A table with many columns will overflow the margins. Wrap it in
+% \begingroup ... \endgroup and shrink the font size and inter-column spacing
+% inside. Because it is wrapped in a group, neither setting leaks into the next
+% table.
+%
+% \cline{3-6} rules only columns 3 through 6, used when consecutive rows share
+% the leading columns and those cells are left merged.
+\begingroup\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{xltabular}{\linewidth}{|P{0.06\linewidth}|P{0.16\linewidth}|P{0.20\linewidth}|Y|P{0.08\linewidth}|P{0.08\linewidth}|}
+\caption{Example of a wide table set in a smaller font.}\label{tab:wide-results}\\
+\hline
+Code & Model & Factor & Value & MAE & RMSE \\
+\hline
+\endfirsthead
+\hline
+Code & Model & Factor & Value & MAE & RMSE \\
+\hline
+\endhead
+\hline
+\endlastfoot
+S1 & Baseline model & Configuration & Default value & 0.00 & 0.00 \\
+\hline
+A1a & Proposed model & Varied parameter & First value & 0.00 & 0.00 \\
+\cline{4-6}
+A1b & & & Second value & 0.00 & 0.00 \\
+\end{xltabular}\endgroup
 
 \section{Discussion}
 \TemplateTodo{Explain why the results occurred, their relationship with theory and related work, and their implications. Do not merely repeat table contents.}

@@ -5,17 +5,40 @@
 
 Tinjauan pustaka bukan sekadar daftar ringkasan artikel. Susun pembahasan secara tematik sehingga pembaca memahami perkembangan pengetahuan, kesenjangan yang masih ada, dan alasan penelitian ini diperlukan.
 
-\begin{table}[H]
-\centering
-\caption{Contoh format ringkasan penelitian terdahulu}
-\begin{tabularx}{\linewidth}{@{}p{0.18\linewidth}X X@{}}
-\toprule
-Peneliti & Fokus dan Metode & Keterkaitan dengan \DocTypeName \\
-\midrule
-Nama peneliti (tahun) & Ringkasan pendek metode, data, dan hasil utama. & Jelaskan pelajaran, celah, atau pembeda penelitian Anda. \\
-\bottomrule
-\end{tabularx}
-\end{table}
+Ringkasan penelitian pembanding disajikan pada Tabel \ref{tab:penelitian-terdahulu}. Sebutkan tabel di dalam kalimat sebelum tabelnya muncul, karena pembaca perlu tahu apa yang akan dibacanya.
+
+% CONTOH TABEL 1: seluruh kolom lentur, memakai bobot L{...}.
+%
+% Tabel ringkasan penelitian terdahulu biasanya panjang, sehingga dipakai
+% xltabular: lebarnya menyesuaikan seperti tabularx, tetapi isinya boleh
+% terpotong antarhalaman seperti longtable. Karena itu tabel TIDAK dibungkus
+% environment table dan tidak memakai [H]: xltabular mengatur posisinya sendiri.
+%
+% Baris judul di antara \endfirsthead dan \endhead diulang pada setiap halaman
+% lanjutan, jadi pembaca tidak perlu kembali ke halaman pertama untuk tahu arti
+% tiap kolom. \endlastfoot menutup tabel dengan satu \hline, sehingga baris data
+% terakhir tidak perlu diberi \hline lagi.
+%
+% Kolom L{bobot} adalah kolom X berbobot yang rata kiri. Jumlah seluruh bobot
+% harus sama dengan cacah kolomnya: lima kolom di bawah ini berjumlah
+% 0,70 + 1,05 + 1,20 + 1,15 + 0,90 = 5,00. Kolom yang isinya panjang diberi
+% bobot lebih besar. Definisinya ada di config/thesis-preamble.tex.
+\begin{xltabular}{\linewidth}{|L{0.70}|L{1.05}|L{1.20}|L{1.15}|L{0.90}|}
+\caption{Ringkasan penelitian pembanding langsung.}\label{tab:penelitian-terdahulu}\\
+\hline
+Penulis (Tahun) & Metode & Dataset & Hasil & Keterbatasan \\
+\hline
+\endfirsthead
+\hline
+Penulis (Tahun) & Metode & Dataset & Hasil & Keterbatasan \\
+\hline
+\endhead
+\hline
+\endlastfoot
+Nama peneliti (tahun) \cite{exampleReference} & Ringkasan pendek metode yang dipakai & Nama dan ukuran dataset beserta cakupannya & Angka hasil utama yang dilaporkan & Celah yang ditanggapi penelitian Anda \\
+\hline
+Nama peneliti (tahun) & Tambahkan satu baris untuk setiap penelitian yang ditinjau & Sebutkan sumber datanya & Nyatakan hasil dengan satuan yang jelas & Tuliskan keterbatasan secara spesifik \\
+\end{xltabular}
 
 \section{Landasan Teori}
 \TemplateTodo{Jelaskan konsep, teori, algoritma, standar, atau kerangka kerja yang benar-benar digunakan pada penelitian.}
@@ -62,3 +85,25 @@ dengan komponen keluaran
 \hat{y}_1 & \hat{y}_2 & \cdots & \hat{y}_k
 \end{bmatrix}^{\mathsf{T}}.
 \end{equation}
+
+\subsection{Gambar dengan Keterangan Panel}
+Gambar yang terdiri atas beberapa panel diberi keterangan (a), (b), dan seterusnya. Alih-alih membuat beberapa environment \texttt{figure} yang masing-masing mendapat nomor sendiri, satu gambar dibungkus \texttt{tikzpicture} lalu keterangan panel ditulis sebagai simpul di bawahnya, sehingga seluruh panel tetap berbagi satu nomor dan satu caption.
+
+\begin{figure}[H]
+\centering
+% Sintaks ($A!0.25!B$) memerlukan pustaka calc dan berarti "titik pada 25%
+% jarak dari A ke B", jadi keterangan panel selalu berada tepat di bawah
+% pusat panelnya berapa pun lebar gambarnya.
+\begin{tikzpicture}
+  \node[anchor=south west, inner sep=0pt] (img) at (0,0)
+    {\includegraphics[width=0.85\linewidth]{example-figure.pdf}};
+  \node[anchor=north, font=\small, yshift=-2mm]
+    at ($(img.south west)!0.25!(img.south east)$) {(a) sebelum pemrosesan};
+  \node[anchor=north, font=\small, yshift=-2mm]
+    at ($(img.south west)!0.75!(img.south east)$) {(b) sesudah pemrosesan};
+\end{tikzpicture}
+\caption{Contoh gambar dengan dua keterangan panel}
+\label{fig:contoh-panel}
+\end{figure}
+
+Perbandingan kedua kondisi ditunjukkan pada Gambar~\ref{fig:contoh-panel}. Untuk gambar yang seluruhnya digambar dengan TikZ atau pgfplots, kerjakan di folder \texttt{tikz/} lalu sisipkan berkas PDF hasilnya; lihat \texttt{tikz/README.md}.

@@ -6,12 +6,21 @@
 % The template loads files from content/<language>, chapters/<language>,
 % and appendices/<language>.
 % Valid values: indonesian, english
-\newcommand{\ThesisLanguage}{english}
+\newcommand{\ThesisLanguage}{indonesian}
 
 % Change this value to choose the document type.
 % Valid values: skripsi, tesis
 % English labels: skripsi -> Undergraduate Thesis, tesis -> Thesis
 \newcommand{\ThesisDocumentType}{skripsi}
+
+% Visibility of the writing-guide boxes (\TemplateTip, \TemplateTodo) and the
+% draft markers (\Placeholder, \FigurePlaceholder).
+%   auto -> shown in main.tex, hidden in proposal.tex and skripsi-draft.tex
+%   on   -> always shown
+%   off  -> always hidden (use this for the final submitted manuscript)
+% When hidden, \FigurePlaceholder collapses to nothing but the surrounding
+% figure keeps its caption, number, and label.
+\newcommand{\ThesisShowHelpers}{auto}
 
 % Indonesian and English titles. Both are kept because Indonesian university
 % documents commonly need both title forms even when the manuscript language changes.

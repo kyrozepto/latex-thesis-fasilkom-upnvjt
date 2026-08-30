@@ -1,0 +1,44 @@
+% content/cover.tex
+% -----------------------------------------------------------------------------
+% COVER
+% -----------------------------------------------------------------------------
+% Shared by all three drivers. \ThesisCoverTypeLabel (config/thesis-language.tex)
+% prints PRA-SKRIPSI, SKRIPSI (DRAF BAB I--IV), or SKRIPSI depending on
+% \ThesisTarget. Every other line comes from config/thesis-config.tex.
+%
+% The two \hspace* values pull the logo and the yellow rule out of the text
+% block: the rule has to bleed to both paper edges, which the geometry margins
+% would otherwise prevent.
+\begin{titlepage}
+  \renewcommand{\familydefault}{\sfdefault}\sffamily
+  \thispagestyle{empty}
+  \begin{flushleft}
+    \noindent\hspace*{-\dimexpr\oddsidemargin+0.2cm\relax}\includegraphics[width=4cm]{logo_upn.png}
+  \end{flushleft}
+  \vspace{0.35cm}
+  \noindent\hspace*{-\dimexpr\oddsidemargin+1in\relax}{\color{coverYellow}\rule{\paperwidth}{18pt}}
+  \vspace{0.45cm}
+  \begin{flushleft}{\large\bfseries \MakeUppercase{\ThesisCoverTypeLabel}\par}\end{flushleft}
+  \vspace{0.2cm}
+  \begin{flushleft}{\Large\bfseries \ThesisTitleUpper\par}\end{flushleft}
+  \vspace{1.2cm}
+  \begin{flushleft}
+    {\large\bfseries \StudentNameUpper\par}
+    {\large \NpmLabel\ \StudentID\par}
+  \end{flushleft}
+  \vspace{1.2cm}
+  \begin{flushleft}
+    {\large\bfseries \AdvisorBlockLabel\par}
+    {\large \AdvisorOne\par}
+    {\large \AdvisorTwo\par}
+  \end{flushleft}
+  \vspace{1.2cm}
+  \begin{flushleft}
+    {\normalsize\bfseries \MinistryLabel\par}
+    {\normalsize\bfseries \UniversityLabel\par}
+    {\normalsize\bfseries \MakeUppercase{\FacultyLabel}\par}
+    {\normalsize\bfseries \ProgramLabel\par}
+    {\normalsize\bfseries SURABAYA\par}
+    {\normalsize\bfseries \SubmissionYear\par}
+  \end{flushleft}
+\end{titlepage}

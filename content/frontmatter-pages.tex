@@ -1,0 +1,102 @@
+% content/frontmatter-pages.tex
+% -----------------------------------------------------------------------------
+% SIGNATURE SHEETS, ABSTRACT, AND PREFACE
+% -----------------------------------------------------------------------------
+% Only the final manuscript carries these pages. A proposal is not defended and
+% a supervision draft is not signed, so both skip this file entirely.
+\ifThesisFull
+
+\halamanKosong
+
+% ── LEMBAR PENGESAHAN: signed by the examination committee and the dean.
+% \BgThispage draws the faint UPN logo watermark on this page only.
+\chapter*{\ApprovalSheetLabel}
+\addcontentsline{toc}{chapter}{\ApprovalSheetLabel}
+\BgThispage
+\vspace{0.8cm}
+\begin{center}{\bfseries\normalsize \ThesisTitleUpper\par}\end{center}
+\vspace{0.2cm}
+\begin{center}\ByLabel:\\ \StudentNameUpper\\ \NpmLabel. \StudentID\end{center}
+\vspace{0.5cm}
+\noindent \Lang{Telah dipertahankan di hadapan dan diterima oleh Tim Penguji \DocTypeName\ \StudyProgramPhrase\ Fakultas Ilmu Komputer Universitas Pembangunan Nasional Veteran Jawa Timur pada tanggal \DefenseDate.}{This \DocTypeNameLower\ has been defended before and accepted by the \DocTypeName\ Examination Committee of the \StudyProgramPhrase, Faculty of Computer Science, Universitas Pembangunan Nasional Veteran Jawa Timur on \DefenseDate.}
+\vspace{0.2cm}
+\begin{center}\bfseries \AgreeLabel\end{center}
+\vspace{0.2cm}
+\noindent\begin{tabular}{@{}p{0.67\linewidth} p{0.15\linewidth} p{0.25\linewidth}@{}}
+\textbf{\underline{\AdvisorOne}} & \underline{\makebox[\linewidth]{\dotfill}} & \textbf{(\AdvisorOneRole)} \\
+\AdvisorOneID & & \\[0.5cm]
+\textbf{\underline{\AdvisorTwo}} & \underline{\makebox[\linewidth]{\dotfill}} & \textbf{(\AdvisorTwoRole)} \\
+\AdvisorTwoID & & \\[0.5cm]
+\textbf{\underline{\ExaminerOne}} & \underline{\makebox[\linewidth]{\dotfill}} & \textbf{(\ExaminerOneRole)} \\
+\ExaminerOneID & & \\[0.5cm]
+\textbf{\underline{\ExaminerTwo}} & \underline{\makebox[\linewidth]{\dotfill}} & \textbf{(\ExaminerTwoRole)} \\
+\ExaminerTwoID & & \\
+\end{tabular}
+\vspace{0.8cm}
+\begin{center}\begin{tabular}{@{}c@{}}\bfseries \KnowLabel\\\bfseries \DeanRoleLabel\\[2cm]\bfseries {\underline{\DeanName}}\\\DeanID\end{tabular}\end{center}
+
+\halamanKosong
+
+% ── LEMBAR PERSETUJUAN: signed by the study-program coordinator.
+\chapter*{\AcceptanceSheetLabel}
+\addcontentsline{toc}{chapter}{\AcceptanceSheetLabel}
+\BgThispage
+\vspace{1cm}
+\begin{center}{\bfseries\normalsize \ThesisTitleUpper\par}\end{center}
+\vspace{0.2cm}
+\begin{center}\ByLabel:\\ \StudentNameUpper\\ \NpmLabel. \StudentID\end{center}
+\vspace{7.5cm}
+\begin{center}\begin{tabular}{@{}c@{}}\bfseries \AgreeLabel\\\bfseries \HeadProgramRoleLabel\\\bfseries \FacultyLabel\\[2cm]\bfseries {\underline{\HeadOfProgramName}}\\\HeadOfProgramID\end{tabular}\end{center}
+
+\halamanKosong
+
+% ── SURAT PERNYATAAN BEBAS PLAGIASI
+\chapter*{\PlagiarismStatementLabel}
+\addcontentsline{toc}{chapter}{\PlagiarismStatementLabel}
+\vspace{0.5cm}
+\noindent \Lang{Yang bertanda tangan di bawah ini:}{The undersigned:}\par
+\vspace{0.3cm}
+\begin{tabular}{@{} l c l @{}}
+\StudentNameLabel & : & \StudentName \\
+\NpmLabel         & : & \StudentID \\
+\Lang{Program}{Program} & : & \ProgramDegreeLabel \\
+\Lang{Program Studi}{Study Program} & : & \StudyProgramName \\
+\Lang{Fakultas}{Faculty} & : & \Lang{Ilmu Komputer}{Computer Science} \\
+\end{tabular}
+\vspace{0.5cm}
+
+\noindent \Lang{Menyatakan bahwa dalam dokumen ilmiah \DocTypeName\ ini tidak terdapat bagian dari karya ilmiah lain yang telah diajukan untuk memperoleh gelar akademik di suatu lembaga pendidikan tinggi, dan juga tidak terdapat karya atau pendapat yang pernah ditulis atau diterbitkan oleh orang/lembaga lain, kecuali yang secara tertulis disitasi dalam dokumen ini dan disebutkan secara lengkap dalam daftar pustaka.}{Declare that this \DocTypeNameLower\ does not contain parts of another scientific work submitted to obtain an academic degree at any higher education institution, nor does it contain work or opinions written or published by other persons/institutions, except those properly cited and listed in the bibliography.}
+
+\vspace{0.5cm}
+\noindent \Lang{Demikian surat pernyataan ini saya buat dengan sesungguhnya tanpa ada paksaan dari siapa pun juga dan untuk dipergunakan sebagaimana mestinya.}{This statement is made truthfully and without coercion for appropriate use.}
+\vspace{1cm}
+\begin{flushright}\Lang{Surabaya}{Surabaya}, \DefenseDate\\[0.3cm]\Lang{Yang Membuat Pernyataan,}{Declarant,}\\[2.5cm]{\underline \StudentName}\\\NpmLabel. \StudentID\end{flushright}
+
+\halamanKosong
+
+% ── ABSTRAK
+\chapter*{\Lang{ABSTRAK}{ABSTRACT}}
+\addcontentsline{toc}{chapter}{\Lang{ABSTRAK}{ABSTRACT}}
+\noindent\begin{tabular}{@{} l c p{0.60\linewidth} @{}}
+\StudentNameLabel\ / \NpmLabel & : & \StudentName\ / \StudentID \\
+\ThesisTitleLabel & : & \ThesisTitle \\
+\Lang{Dosen Pembimbing}{Advisor} & : & 1. \AdvisorOne \\
+ & & 2. \AdvisorTwo \\
+\end{tabular}
+\vspace{0.5cm}
+\input{content/\ThesisLanguage/abstract}
+\vspace{0.5cm}
+
+\noindent {\bfseries \Lang{Kata Kunci}{Keywords}}: \Lang{\KeywordsID}{\KeywordsEN}
+
+\halamanKosong
+
+% ── KATA PENGANTAR
+\chapter*{\PrefaceLabel}
+\addcontentsline{toc}{chapter}{\PrefaceLabel}
+\input{content/\ThesisLanguage/preface}
+\vspace{1cm}
+\begin{flushright}Surabaya, \DefenseDate\\[2cm]\StudentName\\\end{flushright}
+\clearpage
+
+\fi

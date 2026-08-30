@@ -1,0 +1,36 @@
+% example-diagram.tex -- contoh gambar TikZ mandiri.
+%
+% Dirender menjadi ../figures/example-diagram.pdf oleh build.sh / build.bat,
+% lalu dipanggil dari naskah dengan:
+%
+%   \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.9\linewidth]{example-diagram.pdf}
+%     \caption{Diagram alur tahapan penelitian.}
+%     \label{fig:alur-penelitian}
+%   \end{figure}
+%
+% Kelas standalone memotong kanvas tepat pada tepi gambar, sehingga tidak ada
+% margin kosong yang perlu dipangkas di naskah.
+\documentclass[border=2pt]{standalone}
+\input{preamble}
+
+\begin{document}
+\begin{tikzpicture}[node distance=6mm]
+  \node[tahap]                          (data)  {Pengumpulan\\data};
+  \node[tahap, right=of data]           (pra)   {Prapemrosesan};
+  \node[tahapaksen, right=of pra]       (model) {Pelatihan\\model};
+  \node[tahap, right=of model]          (uji)   {Pengujian};
+  \node[tahap, right=of uji]            (nilai) {Evaluasi\\hasil};
+
+  \draw[panah]      (data)  -- (pra);
+  \draw[panah]      (pra)   -- (model);
+  \draw[panahaksen] (model) -- (uji);
+  \draw[panah]      (uji)   -- (nilai);
+
+  % Kotak putus-putus mengelompokkan tahap yang diulang sampai hasil memadai.
+  \begin{scope}[on background layer]
+    \node[kelompok, fit=(model)(uji), label={[font=\scriptsize, text=netral]below:iterasi}] {};
+  \end{scope}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,37 @@
+% proposal.tex -- Naskah pra-skripsi (proposal), Bab I sampai Bab III.
+% -----------------------------------------------------------------------------
+% Build:  build proposal        (Windows)
+%         ./build.sh proposal   (Linux, macOS, WSL)
+% Manual: pdflatex -> bibtex -> pdflatex -> pdflatex
+%
+% Memuat sampul, daftar isi, daftar gambar, daftar tabel, glosarium, Bab I
+% sampai Bab III, dan daftar pustaka.
+%
+% Tidak memuat lembar pengesahan, lembar persetujuan, surat pernyataan, abstrak,
+% kata pengantar, Bab IV, Bab V, maupun lampiran: proposal belum diuji dan belum
+% memiliki hasil. Daftar algoritma juga dilewati karena penyajian algoritma
+% ditempatkan pada Bab IV.
+%
+% Bab yang dipakai sama persis dengan yang dipakai main.tex. Saat proposal naik
+% menjadi skripsi, isi bab tidak perlu dipindahkan ke mana pun.
+% -----------------------------------------------------------------------------
+\documentclass{template}
+
+\newcommand{\ThesisTarget}{proposal}
+\input{config/thesis-preamble}
+
+\begin{document}
+\frontmattergeometry
+\pagenumbering{roman}
+\setcounter{page}{2}
+
+\input{content/cover}
+\input{content/frontmatter-pages}
+\input{content/frontmatter-lists}
+
+\input{chapters/\ThesisLanguage/ch01-introduction}
+\input{chapters/\ThesisLanguage/ch02-literature-review}
+\input{chapters/\ThesisLanguage/ch03-methodology}
+
+\input{content/backmatter}
+\end{document}

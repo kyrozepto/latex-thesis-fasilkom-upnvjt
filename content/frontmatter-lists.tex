@@ -1,0 +1,72 @@
+% content/frontmatter-lists.tex
+% -----------------------------------------------------------------------------
+% TABLE OF CONTENTS AND THE OTHER FRONT-MATTER LISTS
+% -----------------------------------------------------------------------------
+% Which lists appear depends on \ThesisTarget:
+%
+%                        proposal   draft   full
+%   DAFTAR ISI              yes      yes     yes
+%   DAFTAR GAMBAR           yes      yes     yes
+%   DAFTAR TABEL            yes      yes     yes
+%   DAFTAR ALGORITMA         -       yes     yes
+%   DAFTAR LAMPIRAN          -       yes     yes
+%   GLOSARIUM               yes      yes     yes
+%   DAFTAR SINGKATAN         -        -      yes
+%
+% The proposal has no Bab IV and no appendix, so the two lists that describe
+% them are omitted rather than printed empty. Proposal and draft fold the
+% abbreviations into the glossary to keep the front matter to one page.
+
+% Dot leaders for every list, and an unnumbered chapter heading: these pages are
+% titled DAFTAR ISI, not "BAB I DAFTAR ISI". \ApplyMainChapterStyle puts the
+% numbered format back before the first real chapter.
+\renewcommand{\cftchapleader}{\bfseries\cftdotfill{\ThesisDotSep}}
+\renewcommand{\cftsecleader}{\cftdotfill{\ThesisDotSep}}
+\renewcommand{\cftsubsecleader}{\cftdotfill{\ThesisDotSep}}
+\renewcommand{\cftfigleader}{\cftdotfill{\ThesisDotSep}}
+\renewcommand{\cfttableader}{\cftdotfill{\ThesisDotSep}}
+\titleformat{\chapter}[hang]{\normalfont\normalsize\bfseries\centering}{}{0pt}{\MakeUppercase}
+\titlespacing*{\chapter}{0pt}{0pt}{12pt}
+% Chapter entries in the TOC read "BAB I  Judul". The number column is measured
+% against the widest chapter label the template supports.
+\renewcommand{\cftchappresnum}{\ContentsPrefix}
+\newlength{\mylen}\settowidth{\mylen}{\bfseries \ContentsPrefix VIII}\setlength{\cftchapnumwidth}{\mylen}
+
+\phantomsection\tableofcontents\clearpage
+\phantomsection\addcontentsline{toc}{chapter}{\listfigurename}\listoffigures\clearpage
+\phantomsection\addcontentsline{toc}{chapter}{\listtablename}\listoftables\clearpage
+
+\ifThesisProposal\else
+  % Entri Daftar Algoritma ditulis "Algoritma 4. 1 ..." dengan menambal
+  % \numberline hanya di dalam grup ini, sehingga Daftar Isi tidak ikut berubah.
+  \phantomsection\addcontentsline{toc}{chapter}{\listalgorithmcfname}
+  \begingroup
+    \makeatletter
+    \renewcommand{\@dotsep}{\ThesisDotSep}
+    \makeatother
+    \let\OriginalNumberline\numberline
+    \renewcommand{\numberline}[1]{\OriginalNumberline{\algorithmcfname\ #1}}
+    \listofalgorithms
+  \endgroup
+  \clearpage
+  \phantomsection\addcontentsline{toc}{chapter}{\AppendixListLabel}\listofappendices\clearpage
+\fi
+
+% Glosarium memuat istilah khusus beserta singkatannya.
+\phantomsection\addcontentsline{toc}{chapter}{\GlossaryListLabel}
+\chapter*{\GlossaryListLabel}
+\input{content/\ThesisLanguage/glossary}
+\clearpage
+
+\ifThesisFull
+  \chapter*{\AbbreviationListLabel}
+  \addcontentsline{toc}{chapter}{\AbbreviationListLabel}
+  \input{content/\ThesisLanguage/abbreviations}
+  \clearpage
+\fi
+
+% Back to numbered chapters, main-matter margins, and arabic page numbers.
+\ApplyMainChapterStyle
+\mainmattergeometry
+\pagenumbering{arabic}
+\setcounter{page}{1}

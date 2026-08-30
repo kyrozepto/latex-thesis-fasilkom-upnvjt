@@ -8,18 +8,63 @@ Metodologi harus cukup rinci agar penelitian dapat dipahami dan, sejauh mungkin,
 \section{Objek dan Data Penelitian}
 \TemplateTodo{Jelaskan objek penelitian, sumber data, kriteria inklusi/eksklusi, periode pengambilan data, jumlah data, dan aspek etik atau perizinan jika relevan.}
 
+\section{Analisis Kebutuhan}
+\TemplateTodo{Uraikan kebutuhan perangkat keras, perangkat lunak, dan kebutuhan fungsional sistem. Sebutkan mengapa setiap kebutuhan membatasi pilihan yang diambil pada bab ini.}
+
+Spesifikasi lingkungan yang digunakan ditunjukkan pada Tabel \ref{tab:kebutuhan-perangkat}.
+
+% CONTOH TABEL 2: sebagian kolom lebarnya tetap, satu kolom terakhir lentur.
+%
+% Bentuk inilah yang paling sering dipakai. Kolom P{0,20\linewidth} lebarnya
+% dikunci, sedangkan kolom Y menyerap sisa lebar halaman. Letakkan kolom yang
+% isinya paling panjang di posisi Y, sehingga kolom pendek tidak diregangkan
+% sampai berlubang.
+%
+% Jumlah lebar seluruh kolom P sebaiknya di bawah 1,0\linewidth agar kolom Y
+% masih kebagian ruang. Di bawah ini 0,20 + 0,30 = 0,50, menyisakan sekitar
+% setengah lebar halaman untuk kolom keterangan.
+\begin{xltabular}{\linewidth}{|P{0.20\linewidth}|P{0.30\linewidth}|Y|}
+\caption{Spesifikasi lingkungan komputasi yang digunakan.}\label{tab:kebutuhan-perangkat}\\
+\hline
+Komponen & Spesifikasi & Keterangan \\
+\hline
+\endfirsthead
+\hline
+Komponen & Spesifikasi & Keterangan \\
+\hline
+\endhead
+\hline
+\endlastfoot
+Prosesor & Sebutkan model dan jumlah inti & Jelaskan pengaruhnya terhadap konfigurasi yang dipilih \\
+\hline
+Memori & Sebutkan kapasitas RAM & Jelaskan batas ukuran data yang dapat diproses sekaligus \\
+\hline
+Perangkat lunak & Sebutkan bahasa, pustaka, dan versinya & Versi dicantumkan agar hasil dapat direplikasi \\
+\end{xltabular}
+
+Dua batasan pada Tabel \ref{tab:kebutuhan-perangkat} berdampak langsung pada konfigurasi penelitian. Jelaskan dampaknya di sini, jangan sekadar mengulang isi tabel.
+
 \section{Perancangan Metode atau Sistem}
 \TemplateTodo{Uraikan rancangan metode, model, sistem, atau prosedur eksperimen. Hubungkan setiap komponen dengan tujuan penelitian.}
 
-\begin{algorithm}[H]
-\caption{Contoh format algoritma penelitian}
-\KwInput{Data atau masukan penelitian}
-\KwOutput{Hasil yang dievaluasi}
-Lakukan tahap persiapan data\;
-Terapkan metode yang diusulkan\;
-Evaluasi keluaran menggunakan metrik yang sesuai\;
-\KwReturn{Ringkasan hasil dan analisis}
-\end{algorithm}
+% \Placeholder menandai bagian yang belum ditulis. Kotaknya tampil pada
+% main.tex, tetapi hilang pada proposal.tex dan skripsi-draft.tex, sehingga
+% naskah yang dibawa ke bimbingan tetap bersih. Atur \ThesisShowHelpers di
+% config/thesis-config.tex bila ingin memaksa tampil atau selalu disembunyikan.
+\Placeholder{Rincian arsitektur sistem masih menunggu hasil uji coba awal.}
+
+% \FigurePlaceholder mengisi tempat gambar yang belum tersedia. Berbeda dengan
+% mengosongkan seluruh environment figure, cara ini membuat nomor gambar,
+% caption, dan \label tetap hidup, jadi rujukan \ref di paragraf lain tidak
+% berubah ketika gambar aslinya nanti dipasang.
+\begin{figure}[H]
+\centering
+\FigurePlaceholder{4cm}{Diagram rancangan sistem yang diusulkan}
+\caption{Rancangan sistem yang diusulkan}
+\label{fig:rancangan-sistem}
+\end{figure}
+
+Rancangan sistem ditunjukkan pada Gambar~\ref{fig:rancangan-sistem}. Ganti \verb|\FigurePlaceholder| dengan \verb|\includegraphics| begitu gambarnya siap.
 
 \section{Skenario Pengujian}
 \TemplateTodo{Jelaskan rancangan eksperimen, pembagian data, pembanding, metrik evaluasi, perangkat yang digunakan, dan cara memastikan hasil adil.}

@@ -1,20 +1,19 @@
-% main.tex -- Naskah skripsi penuh, Bab I sampai Bab V.
+% skripsi-draft.tex -- Naskah skripsi berjalan, Bab I sampai Bab IV.
 % -----------------------------------------------------------------------------
-% Build:  build skripsi        (Windows)
-%         ./build.sh skripsi   (Linux, macOS, WSL)
+% Build:  build draft        (Windows)
+%         ./build.sh draft   (Linux, macOS, WSL)
 % Manual: pdflatex -> bibtex -> pdflatex -> pdflatex
 %
-% Memuat sampul, lembar pengesahan, lembar persetujuan, surat pernyataan bebas
-% plagiasi, abstrak, kata pengantar, seluruh daftar, Bab I sampai Bab V, daftar
-% pustaka, dan lampiran.
+% Naskah yang dibawa ke bimbingan setelah proposal disetujui dan hasil mulai
+% ada. Sama dengan proposal.tex, ditambah Bab IV, daftar algoritma, daftar
+% lampiran, dan lampiran.
 %
-% Isi bab diambil dari chapters/<bahasa>/. Naskah proposal (proposal.tex) dan
-% naskah draf (skripsi-draft.tex) memakai berkas bab yang sama, hanya lebih
-% sedikit, sehingga tidak ada isi yang perlu disalin antar naskah.
+% Halaman tanda tangan, abstrak, dan kata pengantar sengaja belum disertakan;
+% ketiganya baru dibutuhkan pada naskah akhir (main.tex).
 % -----------------------------------------------------------------------------
 \documentclass{template}
 
-\newcommand{\ThesisTarget}{full}
+\newcommand{\ThesisTarget}{draft}
 \input{config/thesis-preamble}
 
 \begin{document}
@@ -30,7 +29,6 @@
 \input{chapters/\ThesisLanguage/ch02-literature-review}
 \input{chapters/\ThesisLanguage/ch03-methodology}
 \input{chapters/\ThesisLanguage/ch04-results-discussion}
-\input{chapters/\ThesisLanguage/ch05-conclusion-recommendations}
 
 \input{content/backmatter}
 \end{document}

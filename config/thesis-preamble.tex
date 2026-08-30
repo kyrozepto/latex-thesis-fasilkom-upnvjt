@@ -1,0 +1,135 @@
+% config/thesis-preamble.tex
+% -----------------------------------------------------------------------------
+% SHARED PREAMBLE
+% -----------------------------------------------------------------------------
+% Loaded by main.tex, proposal.tex, and skripsi-draft.tex right after
+% \documentclass{template}. Every package, column type, and helper macro used by
+% the manuscript lives here, so the three drivers differ only in which chapters
+% they include.
+%
+% The driver declares its target before inputting this file:
+%
+%   \newcommand{\ThesisTarget}{proposal}   % proposal | draft | full
+%   \input{config/thesis-preamble}
+%
+%   proposal -> Bab I-III, no algorithm2e, no list of algorithms/appendices
+%   draft    -> Bab I-IV, adds algorithm2e and both lists, adds the appendix
+%   full     -> Bab I-V, adds all signature sheets, abstract, and preface
+% -----------------------------------------------------------------------------
+
+\providecommand{\ThesisTarget}{full}
+
+\usepackage{ifthen}
+\newif\ifThesisProposal
+\newif\ifThesisDraft
+\newif\ifThesisFull
+\ifthenelse{\equal{\ThesisTarget}{proposal}}{\ThesisProposaltrue}{}
+\ifthenelse{\equal{\ThesisTarget}{draft}}{\ThesisDrafttrue}{}
+\ifthenelse{\equal{\ThesisTarget}{full}}{\ThesisFulltrue}{}
+\ifThesisProposal\else\ifThesisDraft\else\ifThesisFull\else
+  \ClassError{template}{Unknown \string\ThesisTarget: \ThesisTarget}%
+    {Set \string\ThesisTarget\space to proposal, draft, or full.}%
+\fi\fi\fi
+
+% ── Mathematics
+\usepackage{amsmath,amsfonts}
+% Persamaan panjang boleh terpotong antarhalaman daripada meninggalkan
+% halaman yang setengah kosong.
+\allowdisplaybreaks[4]
+
+% ── Graphics and floats
+\usepackage{graphicx}
+\usepackage{float}
+\graphicspath{{figures/}}
+
+% ── Tables
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{xltabular}
+\usepackage{booktabs}
+% Kolom X berbobot dan rata kiri. Bobot seluruh kolom dalam satu tabel harus
+% berjumlah sama dengan cacah kolomnya, misalnya 6 kolom -> total bobot 6.
+% Rata kiri dipakai agar kolom sempit tidak diregangkan sampai berlubang.
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash\hsize=#1\hsize}X}
+% Seluruh teks di dalam tabel dibuat rata kiri, bukan rata kanan-kiri.
+% Kolom P menggantikan p{...} dan kolom Y menggantikan X.
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+% ── Pseudocode
+% Naskah proposal tidak memuat algorithm2e: penyajian algoritma ditempatkan pada
+% Bab IV, yang baru hadir pada naskah draf dan naskah skripsi penuh.
+\ifThesisProposal\else
+  \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\fi
+
+% ── Source listings
+% Paket listings tetap dimuat pada semua target karena config/thesis-language.tex
+% mengubah \lstlistingname dan \lstlistlistingname pada awal dokumen.
+\usepackage{listings}
+\usepackage{xcolor}
+
+% ── Cross-references and citations
+\usepackage[hidelinks]{hyperref}
+% Sitasi ganda pada satu kalimat diurutkan menaik dan ditulis dalam kurung
+% terpisah, misalnya [4],[5] bukan [5,4]. Opsi nocompress mencegah rentang
+% berurutan diringkas menjadi [4]-[6]. Paket cite dimuat setelah hyperref
+% agar definisi \@citex miliknya tidak ditimpa kembali.
+\usepackage[nocompress]{cite}
+\renewcommand{\citepunct}{],[}
+
+% ── Cover typeface and diagrams
+\usepackage{helvet}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% -----------------------------------------------------------------------------
+% Configuration. The order matters: thesis-language.tex reads \ThesisLanguage
+% and \ThesisDocumentType at load time, and \ThesisCoverTypeLabel reads the
+% \ifThesis... flags declared above.
+% -----------------------------------------------------------------------------
+\input{config/thesis-config}
+\input{config/thesis-language}
+
+% ── Localized pseudocode keywords
+\ifThesisProposal\else
+  \SetKwInput{KwInput}{\Lang{Masukan}{Input}}
+  \SetKwInput{KwOutput}{\Lang{Keluaran}{Output}}
+  \SetKw{KwReturn}{\Lang{Kembalikan}{Return}}
+\fi
+
+\lstset{basicstyle=\ttfamily\small,breaklines=true,frame=single,columns=fullflexible,keywordstyle=\bfseries,captionpos=b}
+
+% -----------------------------------------------------------------------------
+% Writing-guide boxes and draft markers.
+%
+% \TemplateTip and \TemplateTodo explain what belongs in a section.
+% \Placeholder marks prose that is still missing.
+% \FigurePlaceholder{height}{description} stands in for an image that does not
+% exist yet, inside a normal figure environment, so \caption and \label keep
+% working and the figure keeps its number.
+%
+% All four are always defined, because the chapters call them unconditionally.
+% \ThesisShowHelpers in config/thesis-config.tex decides whether they print.
+% Remove every call before the final submission.
+% -----------------------------------------------------------------------------
+\newif\ifThesisHelpers
+\ifthenelse{\equal{\ThesisShowHelpers}{on}}{\ThesisHelperstrue}{}
+\ifthenelse{\equal{\ThesisShowHelpers}{auto}}{\ifThesisFull\ThesisHelperstrue\fi}{}
+
+\ifThesisHelpers
+  \newcommand{\TemplateTip}[1]{\par\noindent\fbox{\begin{minipage}{0.94\linewidth}\textbf{\Lang{Tips penulisan:}{Writing tip:}} #1\end{minipage}}\par\vspace{0.4em}}
+  \newcommand{\TemplateTodo}[1]{\par\noindent\fbox{\begin{minipage}{0.94\linewidth}\textbf{\Lang{Isi bagian ini:}{Complete this section:}} #1\end{minipage}}\par\vspace{0.4em}}
+  \newcommand{\Placeholder}[1]{\par\noindent\fbox{\begin{minipage}{0.94\linewidth}\textbf{[PLACEHOLDER]} #1\end{minipage}}\par\vspace{0.4em}}
+  \newcommand{\FigurePlaceholder}[2]{%
+    \setlength{\fboxsep}{0pt}%
+    \fbox{\begin{minipage}[c][#1][c]{0.94\linewidth}%
+    \centering\footnotesize\itshape\color{black!55}%
+    \Lang{[GAMBAR BELUM TERSEDIA]}{[FIGURE NOT AVAILABLE YET]}\\[0.4em]#2%
+    \end{minipage}}}
+\else
+  \newcommand{\TemplateTip}[1]{}
+  \newcommand{\TemplateTodo}[1]{}
+  \newcommand{\Placeholder}[1]{}
+  \newcommand{\FigurePlaceholder}[2]{}
+\fi

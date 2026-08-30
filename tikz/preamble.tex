@@ -1,0 +1,74 @@
+% preamble.tex -- pengaturan bersama seluruh gambar TikZ.
+% Dipanggil dengan \input{preamble} tepat setelah \documentclass{standalone}.
+%
+% Font disamakan dengan template.cls (newtxtext/newtxmath) supaya teks di
+% dalam gambar menyatu dengan teks naskah. Tanpa ini, angka pada sumbu grafik
+% terlihat berbeda dari angka pada paragraf di sebelahnya.
+
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext,newtxmath}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{calc,positioning,arrows.meta,decorations.pathreplacing,fit,backgrounds,shapes.geometric}
+
+% Warna konsisten antar gambar.
+\definecolor{aksen}{RGB}{0,90,160}      % biru: kurva atau objek utama kedua
+\definecolor{aksendua}{RGB}{170,60,20}  % jingga gelap: objek ketiga
+\definecolor{netral}{gray}{0.45}
+
+% Gaya baku untuk diagram alur.
+\tikzset{
+  tahap/.style={
+    rectangle, rounded corners=2pt, draw=black!55, fill=gray!8,
+    align=center, font=\footnotesize, inner sep=5pt,
+  },
+  tahapaksen/.style={
+    tahap, draw=aksen, fill=aksen!8,
+  },
+  panah/.style={
+    -{Latex[length=5pt,width=4pt]}, line width=0.7pt, draw=black!60,
+  },
+  panahaksen/.style={
+    panah, draw=aksen,
+  },
+  kelompok/.style={
+    rectangle, rounded corners=3pt, draw=netral, dashed, line width=0.5pt,
+    inner sep=7pt,
+  },
+}
+
+% Gaya sumbu baku: garis tengah, grid tipis, label kecil.
+\pgfplotsset{
+  bakuaxis/.style={
+    axis lines=left,
+    axis line style={gray!70},
+    tick label style={font=\footnotesize},
+    label style={font=\small},
+    legend style={font=\footnotesize, draw=gray!50, fill=white,
+                  fill opacity=0.9, text opacity=1, row sep=1pt},
+    grid=both,
+    grid style={line width=0.2pt, draw=gray!18},
+    every axis plot/.append style={line width=1.0pt},
+  },
+  bakubar/.style={
+    ybar,
+    bar width=\barw,
+    fill=gray!35,
+    draw=black!70,
+    line width=0.5pt,
+  },
+}
+
+\newcommand{\barw}{7pt}
+
+% Label panel (a)/(b)/(c) di bawah sebuah axis bernama.
+% Anchor "below south" milik pgfplots berada di bawah seluruh elemen axis,
+% termasuk label sumbu, sehingga label panel tidak pernah bertabrakan dengannya.
+\newcommand{\panellabel}[2]{%
+  \node[font=\small, anchor=north, yshift=-1.5mm] at (#1.below south) {#2};}
+
+% Keterangan bersama di bawah dua axis bernama.
+\newcommand{\keteranganbersama}[3]{%
+  \node[font=\scriptsize, align=center, anchor=north, yshift=-10mm]
+    at ($(#1.below south)!0.5!(#2.below south)$) {#3};}

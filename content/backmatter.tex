@@ -1,0 +1,26 @@
+% content/backmatter.tex
+% -----------------------------------------------------------------------------
+% BIBLIOGRAPHY AND APPENDIX
+% -----------------------------------------------------------------------------
+% DAFTAR PUSTAKA and LAMPIRAN are chapters, but they are not numbered chapters,
+% so the "BAB " prefix is stripped from every TOC entry written from here on.
+% This is done through the .toc file rather than directly, because the entries
+% are read back on the next run.
+\clearpage
+\phantomsection
+\addtocontents{toc}{\protect\renewcommand{\protect\cftchappresnum}{}}
+\addtocontents{toc}{\protect\setlength{\protect\cftchapnumwidth}{0pt}}
+\addcontentsline{toc}{chapter}{\BibliographyLabel}
+\bibliographystyle{unsrt}
+% Add more .bib files as a comma-separated list, without the .bib extension:
+% \bibliography{references/example,references/another}
+\bibliography{references/example}
+
+% Naskah proposal belum memuat lampiran.
+\ifThesisProposal\else
+  \clearpage
+  % Lampiran hanya tampil sebagai satu entri LAMPIRAN di Daftar Isi; rinciannya
+  % dicatat pada Daftar Lampiran lewat \AppendixSection dan \AppendixSubsection.
+  \setcounter{tocdepth}{0}
+  \input{appendices/\ThesisLanguage/appA}
+\fi

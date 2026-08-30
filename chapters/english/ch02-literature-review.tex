@@ -5,17 +5,40 @@
 
 A literature review is not merely a list of article summaries. Organize it thematically so readers understand the development of knowledge, remaining gaps, and why this study is needed.
 
-\begin{table}[H]
-\centering
-\caption{Example format for summarizing related work}
-\begin{tabularx}{\linewidth}{@{}p{0.18\linewidth}X X@{}}
-\toprule
-Author & Focus and Method & Relevance to This \DocTypeName \\
-\midrule
-Author name (year) & Short summary of method, data, and main results. & Explain lessons, gaps, or distinctions for your research. \\
-\bottomrule
-\end{tabularx}
-\end{table}
+A summary of the directly comparable studies is presented in Table \ref{tab:related-work}. Mention a table in a sentence before it appears, because readers need to know what they are about to read.
+
+% TABLE EXAMPLE 1: every column flexible, using L{...} weights.
+%
+% A related-work table is usually long, so it uses xltabular: the width adapts
+% like tabularx, but the body may break across pages like longtable. That is why
+% the table is NOT wrapped in a table environment and takes no [H]: xltabular
+% places itself.
+%
+% The header rows between \endfirsthead and \endhead repeat on every
+% continuation page, so readers never have to flip back to learn what a column
+% means. \endlastfoot closes the table with one \hline, so the final data row
+% needs no \hline of its own.
+%
+% L{weight} is a weighted, ragged-right X column. The weights in one table must
+% sum to the number of columns: the five below add up to
+% 0.70 + 1.05 + 1.20 + 1.15 + 0.90 = 5.00. Give the wordiest column the largest
+% weight. The definition lives in config/thesis-preamble.tex.
+\begin{xltabular}{\linewidth}{|L{0.70}|L{1.05}|L{1.20}|L{1.15}|L{0.90}|}
+\caption{Summary of directly comparable studies.}\label{tab:related-work}\\
+\hline
+Author (Year) & Method & Dataset & Results & Limitations \\
+\hline
+\endfirsthead
+\hline
+Author (Year) & Method & Dataset & Results & Limitations \\
+\hline
+\endhead
+\hline
+\endlastfoot
+Author name (year) \cite{exampleReference} & Short summary of the method used & Dataset name, size, and coverage & The main reported figures & The gap your study addresses \\
+\hline
+Author name (year) & Add one row per study you review & Name the data source & State results with clear units & Write the limitation specifically \\
+\end{xltabular}
 
 \section{Theoretical Foundation}
 \TemplateTodo{Explain concepts, theories, algorithms, standards, or frameworks that are actually used in the study.}
@@ -62,3 +85,25 @@ with output components
 \hat{y}_1 & \hat{y}_2 & \cdots & \hat{y}_k
 \end{bmatrix}^{\mathsf{T}}.
 \end{equation}
+
+\subsection{Figures With Panel Labels}
+A figure made of several panels is labelled (a), (b), and so on. Instead of several \texttt{figure} environments that would each take their own number, one image is wrapped in a \texttt{tikzpicture} and the panel labels are placed as nodes beneath it, so all panels keep sharing a single number and a single caption.
+
+\begin{figure}[H]
+\centering
+% The ($A!0.25!B$) syntax needs the calc library and means "the point 25% of the
+% way from A to B", so a panel label always sits directly under the centre of
+% its panel no matter how wide the image is scaled.
+\begin{tikzpicture}
+  \node[anchor=south west, inner sep=0pt] (img) at (0,0)
+    {\includegraphics[width=0.85\linewidth]{example-figure.pdf}};
+  \node[anchor=north, font=\small, yshift=-2mm]
+    at ($(img.south west)!0.25!(img.south east)$) {(a) before processing};
+  \node[anchor=north, font=\small, yshift=-2mm]
+    at ($(img.south west)!0.75!(img.south east)$) {(b) after processing};
+\end{tikzpicture}
+\caption{Example figure with two panel labels}
+\label{fig:example-panels}
+\end{figure}
+
+The two conditions are compared in Figure~\ref{fig:example-panels}. For figures drawn entirely in TikZ or pgfplots, work in the \texttt{tikz/} folder and include the resulting PDF; see \texttt{tikz/README.md}.

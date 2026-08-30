@@ -3,21 +3,96 @@
 \section{Hasil Implementasi atau Pelaksanaan Penelitian}
 \TemplateTodo{Laporkan apa yang benar-benar berhasil dibuat, dikumpulkan, atau dijalankan. Pisahkan hasil faktual dari interpretasi.}
 
+% Pseudocode ditempatkan di Bab IV, bukan Bab III, karena yang dilaporkan adalah
+% prosedur yang benar-benar dijalankan. Karena itu pula naskah proposal tidak
+% memuat algorithm2e sama sekali.
+%
+% \KwInput, \KwOutput, dan \KwReturn adalah versi dwibahasa yang didefinisikan
+% config/thesis-preamble.tex: keduanya mencetak Masukan/Keluaran/Kembalikan pada
+% naskah Indonesia dan Input/Output/Return pada naskah Inggris. Perintah bawaan
+% algorithm2e (\KwIn, \KwOut, \Return) tetap tersedia, tetapi selalu berbahasa
+% Inggris. Nomornya menjadi "Algoritma 4. 1" dan masuk ke DAFTAR ALGORITMA.
+\begin{algorithm}[H]
+\caption{Contoh format algoritma penelitian}\label{alg:contoh}
+\KwInput{Data atau masukan penelitian}
+\KwOutput{Hasil yang dievaluasi}
+Lakukan tahap persiapan data\;
+Terapkan metode yang diusulkan\;
+\ForEach{skenario pengujian}{
+  Evaluasi keluaran menggunakan metrik yang sesuai\;
+}
+\KwReturn{Ringkasan hasil dan analisis}
+\end{algorithm}
+
+Prosedur tersebut diringkas pada Algoritma~\ref{alg:contoh}.
+
 \section{Hasil Pengujian}
 \TemplateTodo{Sajikan hasil utama sesuai skenario pada Bab III. Tabel harus memiliki judul jelas, satuan, dan keterangan yang cukup.}
 
-\begin{table}[H]
-\centering
-\caption{Contoh tabel hasil pengujian}
-\begin{tabular}{@{}lcc@{}}
-\toprule
-Skenario & Metrik 1 & Metrik 2 \\
-\midrule
-Skenario A & nilai & nilai \\
-Skenario B & nilai & nilai \\
-\bottomrule
-\end{tabular}
-\end{table}
+Hasil utama dirangkum pada Tabel \ref{tab:hasil-pengujian}.
+
+% CONTOH TABEL 3: tabel angka, kolom sempit, tanpa kolom lentur.
+%
+% Ketika seluruh kolom berisi angka pendek, tabularx tidak diperlukan: cukup
+% longtable dengan kolom l dan c biasa, yang lebarnya menyesuaikan isi. Kolom c
+% dipakai untuk angka agar rata tengah dan mudah dibandingkan antarbaris.
+%
+% \multicolumn{4}{|l|}{\textbf{...}} membuat baris judul kelompok yang
+% membentang di seluruh lebar tabel, dipakai untuk memisahkan blok skenario
+% tanpa harus memecah tabel menjadi beberapa tabel kecil.
+\begin{longtable}{|l|c|c|c|}
+\caption{Contoh tabel hasil pengujian.}\label{tab:hasil-pengujian}\\
+\hline
+Skenario & Metrik 1 & Metrik 2 & Metrik 3 \\
+\hline
+\endfirsthead
+\hline
+Skenario & Metrik 1 & Metrik 2 & Metrik 3 \\
+\hline
+\endhead
+\hline
+\endlastfoot
+\multicolumn{4}{|l|}{\textbf{Protokol pengujian utama}} \\
+\hline
+Skenario A & 0,00 & 0,00 & 0,00 \\
+\hline
+Skenario B & 0,00 & 0,00 & 0,00 \\
+\hline
+\multicolumn{4}{|l|}{\textbf{Protokol ablasi}} \\
+\hline
+Skenario C & 0,00 & 0,00 & 0,00 \\
+\end{longtable}
+
+Angka desimal ditulis dengan koma pada naskah Bahasa Indonesia. Di dalam mode matematika, tulis \verb|$0{,}00$| agar tidak muncul spasi setelah komanya.
+
+% CONTOH TABEL 4: tabel lebar dengan banyak kolom.
+%
+% Tabel yang kolomnya banyak akan meluber melewati margin. Bungkus dengan
+% \begingroup ... \endgroup lalu perkecil ukuran huruf dan jarak antarkolom di
+% dalamnya. Karena dibungkus grup, kedua pengaturan itu tidak bocor ke tabel
+% berikutnya.
+%
+% \cline{3-6} memberi garis hanya pada kolom 3 sampai 6, dipakai ketika beberapa
+% baris berbagi isi kolom pertama sehingga kolom itu dibiarkan menyatu.
+\begingroup\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{xltabular}{\linewidth}{|P{0.06\linewidth}|P{0.16\linewidth}|P{0.20\linewidth}|Y|P{0.08\linewidth}|P{0.08\linewidth}|}
+\caption{Contoh tabel lebar dengan ukuran huruf diperkecil.}\label{tab:hasil-lebar}\\
+\hline
+Kode & Model & Faktor & Nilai & MAE & RMSE \\
+\hline
+\endfirsthead
+\hline
+Kode & Model & Faktor & Nilai & MAE & RMSE \\
+\hline
+\endhead
+\hline
+\endlastfoot
+S1 & Model dasar & Konfigurasi & Nilai bawaan & 0,00 & 0,00 \\
+\hline
+A1a & Model usulan & Parameter yang diubah & Nilai pertama & 0,00 & 0,00 \\
+\cline{4-6}
+A1b & & & Nilai kedua & 0,00 & 0,00 \\
+\end{xltabular}\endgroup
 
 \section{Pembahasan}
 \TemplateTodo{Jelaskan mengapa hasil tersebut terjadi, hubungannya dengan teori dan penelitian terdahulu, serta implikasinya. Jangan hanya mengulang isi tabel.}

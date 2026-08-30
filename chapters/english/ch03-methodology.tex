@@ -8,18 +8,63 @@ The methodology should be detailed enough for the study to be understood and, wh
 \section{Research Object and Data}
 \TemplateTodo{Describe the research object, data sources, inclusion/exclusion criteria, collection period, data quantity, and ethical or permission aspects if relevant.}
 
+\section{Requirements Analysis}
+\TemplateTodo{Describe the hardware, software, and functional requirements. State why each requirement constrains the choices made in this chapter.}
+
+The environment used is specified in Table \ref{tab:requirements}.
+
+% TABLE EXAMPLE 2: some columns fixed, one trailing flexible column.
+%
+% This is the form you will use most often. A P{0.20\linewidth} column has its
+% width locked, while the Y column absorbs whatever page width is left. Put the
+% wordiest column in the Y position so the narrow ones are not stretched into
+% gappy lines.
+%
+% Keep the P widths summing to under 1.0\linewidth so the Y column still gets
+% room. Below, 0.20 + 0.30 = 0.50, leaving roughly half the page for the notes
+% column.
+\begin{xltabular}{\linewidth}{|P{0.20\linewidth}|P{0.30\linewidth}|Y|}
+\caption{Specification of the computing environment used.}\label{tab:requirements}\\
+\hline
+Component & Specification & Notes \\
+\hline
+\endfirsthead
+\hline
+Component & Specification & Notes \\
+\hline
+\endhead
+\hline
+\endlastfoot
+Processor & State the model and core count & Explain how it constrains the chosen configuration \\
+\hline
+Memory & State the RAM capacity & Explain the limit on how much data can be processed at once \\
+\hline
+Software & State the language, libraries, and versions & Versions are recorded so results can be replicated \\
+\end{xltabular}
+
+Two constraints in Table \ref{tab:requirements} bear directly on the research configuration. Explain their consequences here; do not merely repeat the table.
+
 \section{Method or System Design}
 \TemplateTodo{Describe the design of the method, model, system, or experimental procedure. Connect each component with the research objectives.}
 
-\begin{algorithm}[H]
-\caption{Example research algorithm format}
-\KwInput{Research data or input}
-\KwOutput{Evaluated results}
-Perform data preparation\;
-Apply the proposed method\;
-Evaluate outputs using appropriate metrics\;
-\KwReturn{Summary of results and analysis}
-\end{algorithm}
+% \Placeholder marks prose that is not written yet. The box shows up in main.tex
+% but disappears in proposal.tex and skripsi-draft.tex, so the manuscript you
+% hand to an advisor stays clean. Set \ThesisShowHelpers in
+% config/thesis-config.tex to force it on or off.
+\Placeholder{Architecture details are still waiting on the first pilot run.}
+
+% \FigurePlaceholder stands in for an image that does not exist yet. Unlike
+% deleting the whole figure environment, this keeps the figure number, caption,
+% and \label alive, so \ref calls elsewhere do not shift once the real image
+% arrives.
+\begin{figure}[H]
+\centering
+\FigurePlaceholder{4cm}{Diagram of the proposed system design}
+\caption{Proposed system design}
+\label{fig:system-design}
+\end{figure}
+
+The system design is shown in Figure~\ref{fig:system-design}. Replace \verb|\FigurePlaceholder| with \verb|\includegraphics| as soon as the image is ready.
 
 \section{Evaluation Scenario}
 \TemplateTodo{Explain the experimental design, data split, baselines/comparators, evaluation metrics, hardware/software, and how fair comparison is ensured.}
